@@ -1,0 +1,52 @@
+{
+  "root": "apps/news-graphql",
+  "sourceRoot": "apps/news-graphql/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/news-graphql",
+        "main": "apps/news-graphql/src/main.ts",
+        "tsConfig": "apps/news-graphql/tsconfig.app.json",
+        "assets": ["apps/news-graphql/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/news-graphql/src/environments/environment.ts",
+              "with": "apps/news-graphql/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "news-graphql:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/news-graphql/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/news-graphql"],
+      "options": {
+        "jestConfig": "apps/news-graphql/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
