@@ -1,0 +1,244 @@
+scalar Date
+
+type ContentContent {
+  text: String
+  sectionTitle: String
+}
+
+type Content {
+  type: ContentType
+  content: ContentContent
+}
+
+type MobileImage {
+  url: String
+  caption: String
+}
+
+type DesktopImage {
+  url: String
+  caption: String
+}
+
+interface Article {
+  uid: Int
+  articleId: Int
+  title: String
+  type: ArticleType
+  language: Language
+  datePublished: String
+  dateUpdated: String
+  url: String
+  shortDescription: String
+}
+
+type NewsArticle implements Article {
+  uid: Int
+  articleId: Int
+  title: String
+  type: ArticleType
+  language: Language
+  datePublished: String
+  dateUpdated: String
+  url: String
+  shortDescription: String
+
+  newsletterSubscription: String
+  content: [Content]
+  interests: [String]
+  audiences: [String]
+  mobileImage: MobileImage
+  desktopImage: DesktopImage
+}
+
+interface MaintenanceArticle implements Article {
+  uid: Int
+  articleId: Int
+  title: String
+  type: ArticleType
+  language: Language
+  datePublished: String
+  dateUpdated: String
+  url: String
+  shortDescription: String
+
+  status: Status
+  statusLabel: String
+  startDate: String
+  endDate: String
+  content: [Content]
+  updates: [String]
+}
+
+type DisruptionArticle implements Article {
+  uid: Int
+  articleId: Int
+  title: String
+  type: ArticleType
+  language: Language
+  datePublished: String
+  dateUpdated: String
+  url: String
+  shortDescription: String
+
+  status: Status
+  statusLabel: String
+  startDate: String
+  endDate: String
+  content: [Content]
+  updates: [String]
+}
+
+type ArchiveArticle implements Article {
+  uid: Int
+  articleId: Int
+  title: String
+  type: ArticleType
+  language: Language
+  datePublished: String
+  dateUpdated: String
+  url: String
+  shortDescription: String
+
+  status: Status
+  statusLabel: String
+  startDate: String
+  endDate: String
+  content: [Content]
+  updates: [String]
+}
+
+type EventArticle implements Article {
+  uid: Int
+  articleId: Int
+  title: String
+  type: ArticleType
+  language: Language
+  datePublished: String
+  dateUpdated: String
+  url: String
+  shortDescription: String
+
+  dateLocation: String
+  startDate: String
+  endDate: String
+  content: [Content]
+  mobileImage: MobileImage
+  desktopImage: DesktopImage
+}
+
+interface Iterator {
+  skip: Int
+  take: Int
+  total: Int
+  currentPage: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  pageCount: Int
+}
+
+type NewsArticleList implements Iterator {
+  skip: Int
+  take: Int
+  total: Int
+  currentPage: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  pageCount: Int
+
+  list: [NewsArticle]
+}
+
+type EventArticleList implements Iterator {
+  skip: Int
+  take: Int
+  total: Int
+  currentPage: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  pageCount: Int
+
+  list: [EventArticle]
+}
+
+type MaintenanceArticleList implements Iterator {
+  skip: Int
+  take: Int
+  total: Int
+  currentPage: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  pageCount: Int
+
+  list: [MaintenanceArticle]
+}
+
+type DisruptionArticleList implements Iterator {
+  skip: Int
+  take: Int
+  total: Int
+  currentPage: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  pageCount: Int
+
+  list: [DisruptionArticle]
+}
+
+type ArchiveArticleList implements Iterator {
+  skip: Int
+  take: Int
+  total: Int
+  currentPage: Int
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  pageCount: Int
+
+  list: [DisruptionArticle]
+}
+
+enum ArticleType {
+  news
+  event
+  disruption
+  maintenance
+  archive
+  press
+}
+
+enum ContentType {
+  sectionTitleBlock
+  textBlock
+  imageBlock
+  textImageBlock
+  doubleImageBlock
+  videoBlock
+  imageGalleryBlock
+  newsletterSubscribeBlock
+  linkListBlock
+  checkmarkListBlock
+}
+
+enum Status {
+  reported
+  inProgress
+  resolved
+}
+
+enum Language {
+  nl
+  de
+  en
+}
+
+enum LocationName {
+  Aalsmeer
+  Naaldwijk
+  Rijnburg
+}
+
+input DataQueryParams {
+  language: Language
+  skip: Int
+  take: Int
+}

@@ -9,8 +9,14 @@
   },
   "private": true,
   "dependencies": {
+    "apollo-server-express": "^3.6.3",
+    "axios": "^0.26.0",
+    "class-validator": "^0.13.2",
     "express": "4.17.2",
-    "tslib": "^2.0.0"
+    "graphql": "^15.3.0",
+    "reflect-metadata": "^0.1.13",
+    "tslib": "^2.0.0",
+    "type-graphql": "^1.1.1"
   },
   "devDependencies": {
     "@nrwl/cli": "13.8.4",
