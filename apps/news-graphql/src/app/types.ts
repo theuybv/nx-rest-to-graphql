@@ -575,3 +575,42 @@ export class DataQueryParams {
   @TypeGraphQL.Field((type) => TypeGraphQL.Int, { nullable: true })
   take!: Maybe<Scalars['Int']>;
 }
+
+export type Query = {
+  __typename?: 'Query';
+  news?: Maybe<NewsArticleList>;
+  event?: Maybe<EventArticleList>;
+  maintenance?: Maybe<MaintenanceArticleList>;
+  disruption?: Maybe<DisruptionArticleList>;
+  archive?: Maybe<ArchiveArticleList>;
+};
+
+@TypeGraphQL.ArgsType()
+export class QueryNewsArgs {
+  @TypeGraphQL.Field((type) => DataQueryParams, { nullable: true })
+  params!: Maybe<DataQueryParams>;
+}
+
+@TypeGraphQL.ArgsType()
+export class QueryEventArgs {
+  @TypeGraphQL.Field((type) => DataQueryParams, { nullable: true })
+  params!: Maybe<DataQueryParams>;
+}
+
+@TypeGraphQL.ArgsType()
+export class QueryMaintenanceArgs {
+  @TypeGraphQL.Field((type) => DataQueryParams, { nullable: true })
+  params!: Maybe<DataQueryParams>;
+}
+
+@TypeGraphQL.ArgsType()
+export class QueryDisruptionArgs {
+  @TypeGraphQL.Field((type) => DataQueryParams, { nullable: true })
+  params!: Maybe<DataQueryParams>;
+}
+
+@TypeGraphQL.ArgsType()
+export class QueryArchiveArgs {
+  @TypeGraphQL.Field((type) => DataQueryParams, { nullable: true })
+  params!: Maybe<DataQueryParams>;
+}

@@ -1,0 +1,82 @@
+{
+  "root": "apps/graphql-news-app",
+  "sourceRoot": "apps/graphql-news-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/graphql-news-app",
+        "index": "apps/graphql-news-app/src/index.html",
+        "baseHref": "/",
+        "main": "apps/graphql-news-app/src/main.tsx",
+        "polyfills": "apps/graphql-news-app/src/polyfills.ts",
+        "tsConfig": "apps/graphql-news-app/tsconfig.app.json",
+        "assets": [
+          "apps/graphql-news-app/src/favicon.ico",
+          "apps/graphql-news-app/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/graphql-news-app/src/environments/environment.ts",
+              "with": "apps/graphql-news-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "graphql-news-app:build",
+        "hmr": true,
+        "proxyConfig": "apps/graphql-news-app/proxy.config.json"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "graphql-news-app:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/graphql-news-app/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/apps/graphql-news-app"
+      ],
+      "options": {
+        "jestConfig": "apps/graphql-news-app/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

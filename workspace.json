@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "graphql-news-app": "apps/graphql-news-app",
+    "graphql-news-app-e2e": "apps/graphql-news-app-e2e",
     "news-graphql": "apps/news-graphql"
   }
 }

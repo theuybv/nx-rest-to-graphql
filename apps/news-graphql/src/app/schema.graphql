@@ -242,3 +242,11 @@ input DataQueryParams {
   skip: Int
   take: Int
 }
+
+type Query {
+  news(params: DataQueryParams): NewsArticleList
+  event(params: DataQueryParams): EventArticleList
+  maintenance(params: DataQueryParams): MaintenanceArticleList
+  disruption(params: DataQueryParams): DisruptionArticleList
+  archive(params: DataQueryParams): ArchiveArticleList
+}
