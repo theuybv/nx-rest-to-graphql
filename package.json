@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "start": "nx run-many --target=serve --projects=news-graphql,graphql-news-app",
     "build": "nx build",
     "test": "nx test"
   },
@@ -11,12 +11,13 @@
   "dependencies": {
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",
+    "@urql/exchange-refocus": "^0.2.5",
     "apollo-server-express": "^3.6.3",
     "axios": "^0.26.0",
     "class-validator": "^0.13.2",
     "core-js": "^3.6.5",
     "express": "4.17.2",
-    "graphql": "^15.3.0",
+    "graphql": "^15.8.0",
     "graphql-tag": "^2.12.6",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -24,7 +25,8 @@
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.0.0",
-    "type-graphql": "^1.1.1"
+    "type-graphql": "^1.1.1",
+    "urql": "^2.2.0"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "11.3.0",

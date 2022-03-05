@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import * as Urql from 'urql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -10,6 +11,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -268,6 +270,9 @@ export type DataQueryParams = {
 
 export type Query = {
   __typename?: 'Query';
+  languages?: Maybe<Array<Maybe<Language>>>;
+  contentTypes?: Maybe<Array<Maybe<ContentType>>>;
+  articleTypes?: Maybe<Array<Maybe<ArticleType>>>;
   news?: Maybe<NewsArticleList>;
   event?: Maybe<EventArticleList>;
   maintenance?: Maybe<MaintenanceArticleList>;
@@ -294,3 +299,135 @@ export type QueryDisruptionArgs = {
 export type QueryArchiveArgs = {
   params?: InputMaybe<DataQueryParams>;
 };
+
+type ArticleFields_NewsArticle_Fragment = {
+  __typename?: 'NewsArticle';
+  uid?: number | null;
+  articleId?: number | null;
+  title?: string | null;
+  type?: ArticleType | null;
+  language?: Language | null;
+  datePublished?: string | null;
+  dateUpdated?: string | null;
+  url?: string | null;
+  shortDescription?: string | null;
+};
+
+type ArticleFields_DisruptionArticle_Fragment = {
+  __typename?: 'DisruptionArticle';
+  uid?: number | null;
+  articleId?: number | null;
+  title?: string | null;
+  type?: ArticleType | null;
+  language?: Language | null;
+  datePublished?: string | null;
+  dateUpdated?: string | null;
+  url?: string | null;
+  shortDescription?: string | null;
+};
+
+type ArticleFields_ArchiveArticle_Fragment = {
+  __typename?: 'ArchiveArticle';
+  uid?: number | null;
+  articleId?: number | null;
+  title?: string | null;
+  type?: ArticleType | null;
+  language?: Language | null;
+  datePublished?: string | null;
+  dateUpdated?: string | null;
+  url?: string | null;
+  shortDescription?: string | null;
+};
+
+type ArticleFields_EventArticle_Fragment = {
+  __typename?: 'EventArticle';
+  uid?: number | null;
+  articleId?: number | null;
+  title?: string | null;
+  type?: ArticleType | null;
+  language?: Language | null;
+  datePublished?: string | null;
+  dateUpdated?: string | null;
+  url?: string | null;
+  shortDescription?: string | null;
+};
+
+export type ArticleFieldsFragment =
+  | ArticleFields_NewsArticle_Fragment
+  | ArticleFields_DisruptionArticle_Fragment
+  | ArticleFields_ArchiveArticle_Fragment
+  | ArticleFields_EventArticle_Fragment;
+
+export type NewsAndEventQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NewsAndEventQuery = {
+  __typename?: 'Query';
+  news?: {
+    __typename?: 'NewsArticleList';
+    list?: Array<{
+      __typename?: 'NewsArticle';
+      uid?: number | null;
+      articleId?: number | null;
+      title?: string | null;
+      type?: ArticleType | null;
+      language?: Language | null;
+      datePublished?: string | null;
+      dateUpdated?: string | null;
+      url?: string | null;
+      shortDescription?: string | null;
+    } | null> | null;
+  } | null;
+  event?: {
+    __typename?: 'EventArticleList';
+    list?: Array<{
+      __typename?: 'EventArticle';
+      uid?: number | null;
+      articleId?: number | null;
+      title?: string | null;
+      type?: ArticleType | null;
+      language?: Language | null;
+      datePublished?: string | null;
+      dateUpdated?: string | null;
+      url?: string | null;
+      shortDescription?: string | null;
+    } | null> | null;
+  } | null;
+};
+
+export const ArticleFieldsFragmentDoc = gql`
+  fragment ArticleFields on Article {
+    uid
+    articleId
+    title
+    type
+    language
+    datePublished
+    dateUpdated
+    url
+    shortDescription
+  }
+`;
+export const NewsAndEventDocument = gql`
+  query NewsAndEvent {
+    news {
+      list {
+        ...ArticleFields
+      }
+    }
+    event {
+      list {
+        ...ArticleFields
+      }
+    }
+  }
+  ${ArticleFieldsFragmentDoc}
+`;
+
+export function useNewsAndEventQuery(
+  options?: Omit<Urql.UseQueryArgs<NewsAndEventQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<NewsAndEventQuery>({
+    query: NewsAndEventDocument,
+    ...options,
+  });
+}

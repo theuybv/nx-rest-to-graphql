@@ -244,6 +244,9 @@ input DataQueryParams {
 }
 
 type Query {
+  languages: [Language]
+  contentTypes: [ContentType]
+  articleTypes: [ArticleType]
   news(params: DataQueryParams): NewsArticleList
   event(params: DataQueryParams): EventArticleList
   maintenance(params: DataQueryParams): MaintenanceArticleList

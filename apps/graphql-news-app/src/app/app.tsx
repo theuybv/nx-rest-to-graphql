@@ -1,54 +1,46 @@
-import styled from '@emotion/styled';
-import NxWelcome from './nx-welcome';
+import { FC, useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import { Provider } from 'urql';
+import { graphqlClient } from './graphqlClient';
+import { useNewsAndEventQuery } from './types';
 
-import { Route, Link } from 'react-router-dom';
+const Index: FC = () => {
+  const [result, reexecuteQuery] = useNewsAndEventQuery({ pause: true });
+  const { fetching, data } = result;
+  let interval: number;
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+  useEffect(() => {
+    interval = window.setInterval(() => {
+      // reexecuteQuery({ requestPolicy: 'network-only' });
+    }, 3000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  if (fetching) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <button onClick={reexecuteQuery}>Load data</button>
+      {data?.news?.list?.map((newsItem) => (
+        <>
+          <p>#{newsItem?.uid}</p>
+          <h3>{newsItem?.title}</h3>
+        </>
+      ))}
+    </div>
+  );
+};
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="graphql-news-app" />
-
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
-      </div>
-      <Route
-        path="/"
-        exact
-        render={() => (
-          <div>
-            This is the generated root route.{' '}
-            <Link to="/page-2">Click here for page 2.</Link>
-          </div>
-        )}
-      />
-      <Route
-        path="/page-2"
-        exact
-        render={() => (
-          <div>
-            <Link to="/">Click here to go back to root page.</Link>
-          </div>
-        )}
-      />
-      {/* END: routes */}
-    </StyledApp>
+    <Provider value={graphqlClient}>
+      <Route path="/" exact component={Index} />
+    </Provider>
   );
 }
 
