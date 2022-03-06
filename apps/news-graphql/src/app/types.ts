@@ -249,8 +249,17 @@ TypeGraphQL.registerEnumType(ContentType, { name: 'ContentType' });
 @TypeGraphQL.InputType()
 export class DataQueryParams {
 
+  @TypeGraphQL.Field(type => FilterParams, { nullable: true })
+  filterParams!: Maybe<FilterParams>;
+
   @TypeGraphQL.Field(type => Language, { nullable: true })
   language!: Maybe<Language>;
+
+  @TypeGraphQL.Field(type => OrderByField, { nullable: true })
+  orderField!: Maybe<OrderByField>;
+
+  @TypeGraphQL.Field(type => OrderType, { nullable: true })
+  orderType!: Maybe<OrderType>;
 
   @TypeGraphQL.Field(type => TypeGraphQL.Int, { nullable: true })
   skip!: Maybe<Scalars['Int']>;
@@ -429,6 +438,22 @@ export class EventArticleList extends Iterator {
   total!: Maybe<Scalars['Int']>;
 };
 
+export enum FilterByField {
+  ShortDescription = 'shortDescription',
+  Title = 'title'
+}
+TypeGraphQL.registerEnumType(FilterByField, { name: 'FilterByField' });
+
+@TypeGraphQL.InputType()
+export class FilterParams {
+
+  @TypeGraphQL.Field(type => FilterByField, { nullable: true })
+  field!: Maybe<FilterByField>;
+
+  @TypeGraphQL.Field(type => String, { nullable: true })
+  match!: Maybe<Scalars['String']>;
+};
+
 export enum Language {
   De = 'de',
   En = 'en',
@@ -561,6 +586,20 @@ export class NewsArticleList extends Iterator {
   @TypeGraphQL.Field(type => TypeGraphQL.Int, { nullable: true })
   total!: Maybe<Scalars['Int']>;
 };
+
+export enum OrderByField {
+  ArticleId = 'articleId',
+  DatePublished = 'datePublished',
+  DateUpdated = 'dateUpdated',
+  Uid = 'uid'
+}
+TypeGraphQL.registerEnumType(OrderByField, { name: 'OrderByField' });
+
+export enum OrderType {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+TypeGraphQL.registerEnumType(OrderType, { name: 'OrderType' });
 
 export type Query = {
   __typename?: 'Query';

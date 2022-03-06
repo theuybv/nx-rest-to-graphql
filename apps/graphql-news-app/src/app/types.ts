@@ -94,7 +94,10 @@ export enum ContentType {
 }
 
 export type DataQueryParams = {
+  filterParams?: InputMaybe<FilterParams>;
   language?: InputMaybe<Language>;
+  orderField?: InputMaybe<OrderByField>;
+  orderType?: InputMaybe<OrderType>;
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
 };
@@ -165,6 +168,16 @@ export type EventArticleList = Iterator & {
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
   total?: Maybe<Scalars['Int']>;
+};
+
+export enum FilterByField {
+  ShortDescription = 'shortDescription',
+  Title = 'title'
+}
+
+export type FilterParams = {
+  field?: InputMaybe<FilterByField>;
+  match?: InputMaybe<Scalars['String']>;
 };
 
 export type Iterator = {
@@ -255,6 +268,18 @@ export type NewsArticleList = Iterator & {
   take?: Maybe<Scalars['Int']>;
   total?: Maybe<Scalars['Int']>;
 };
+
+export enum OrderByField {
+  ArticleId = 'articleId',
+  DatePublished = 'datePublished',
+  DateUpdated = 'dateUpdated',
+  Uid = 'uid'
+}
+
+export enum OrderType {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
 
 export type Query = {
   __typename?: 'Query';

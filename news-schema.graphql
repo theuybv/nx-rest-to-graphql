@@ -237,10 +237,35 @@ enum LocationName {
   Rijnburg
 }
 
+enum OrderType {
+  ASC
+  DESC
+}
+
+enum OrderByField {
+  uid
+  articleId
+  datePublished
+  dateUpdated
+}
+
+enum FilterByField {
+  title
+  shortDescription
+}
+
+input FilterParams {
+  match: String
+  field: FilterByField
+}
+
 input DataQueryParams {
   language: Language
   skip: Int
   take: Int
+  orderField: OrderByField
+  orderType: OrderType
+  filterParams: FilterParams
 }
 
 type Query {

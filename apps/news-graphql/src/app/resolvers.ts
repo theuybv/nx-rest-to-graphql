@@ -10,23 +10,46 @@ import {
   EventArticleList,
   Language,
   MaintenanceArticleList,
-  NewsArticleList,
+  NewsArticleList
 } from './types';
+import { orderBy } from 'lodash';
 
 const getDataFromApi = async (
   articleType: ArticleType,
   params?: DataQueryParams
 ) => {
-  const overrideParams = {
+  const overrideParams: DataQueryParams = {
     ...DEFAULT_QUERY_PARAMS,
-    params,
+    ...params
   };
-  const response = await axios.get(`${BASE_API_URL}/event`, {
+
+  const {
+    filterParams,
+    orderType,
+    orderField
+  } = overrideParams;
+
+  const response = await axios.get(`${BASE_API_URL}/${articleType}`, {
     params: {
-      ...overrideParams,
-    },
+      ...overrideParams
+    }
   });
-  return response.data;
+
+  const orderedList = orderBy(response.data.list,
+    [orderField],
+    [orderType.toLowerCase()]
+  );
+
+  const filteredList = orderedList.filter(item => {
+    return item[filterParams.field]
+      .toLowerCase()
+      .indexOf(filterParams.match.toLowerCase()) > -1;
+  });
+
+  return {
+    ...response.data,
+    list: filteredList
+  };
 };
 
 @Resolver()
@@ -49,7 +72,7 @@ export class QueryResolvers {
   @Query((returns) => EventArticleList)
   async event(
     @Arg('params', { nullable: true })
-    params?: DataQueryParams
+      params?: DataQueryParams
   ) {
     return getDataFromApi(ArticleType.Event, params);
   }
@@ -57,7 +80,7 @@ export class QueryResolvers {
   @Query((returns) => NewsArticleList)
   async news(
     @Arg('params', { nullable: true })
-    params?: DataQueryParams
+      params?: DataQueryParams
   ) {
     return getDataFromApi(ArticleType.News, params);
   }
@@ -65,7 +88,7 @@ export class QueryResolvers {
   @Query((returns) => MaintenanceArticleList)
   async maintenance(
     @Arg('params', { nullable: true })
-    params?: DataQueryParams
+      params?: DataQueryParams
   ) {
     return getDataFromApi(ArticleType.Maintenance, params);
   }
@@ -73,7 +96,7 @@ export class QueryResolvers {
   @Query((returns) => ArchiveArticleList)
   async archive(
     @Arg('params', { nullable: true })
-    params?: DataQueryParams
+      params?: DataQueryParams
   ) {
     return getDataFromApi(ArticleType.Archive, params);
   }
@@ -81,7 +104,7 @@ export class QueryResolvers {
   @Query((returns) => DisruptionArticleList)
   async disruption(
     @Arg('params', { nullable: true })
-    params?: DataQueryParams
+      params?: DataQueryParams
   ) {
     return getDataFromApi(ArticleType.Disruption, params);
   }
