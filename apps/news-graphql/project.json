@@ -3,6 +3,16 @@
   "sourceRoot": "apps/news-graphql/src",
   "projectType": "application",
   "targets": {
+    "codegen": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npm run codegen"
+          }
+        ]
+      }
+    },
     "build": {
       "executor": "@nrwl/node:webpack",
       "outputs": [

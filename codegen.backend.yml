@@ -1,0 +1,5 @@
+schema: ./news-schema.graphql
+generates:
+  ./apps/news-graphql/src/app/types.ts:
+    plugins:
+      - typescript-type-graphql

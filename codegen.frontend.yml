@@ -1,0 +1,10 @@
+schema: ./news-schema.graphql
+documents: ./news-document.graphql
+generates:
+  ./apps/graphql-news-app/src/app/types.ts:
+    config:
+      withHooks: true
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql

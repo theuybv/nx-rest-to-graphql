@@ -1,0 +1,24 @@
+fragment ArticleFields on Article {
+  uid
+  articleId
+  title
+  type
+  language
+  datePublished
+  dateUpdated
+  url
+  shortDescription
+}
+
+query NewsAndEvent {
+  news {
+    list {
+      ...ArticleFields
+    }
+  }
+  event {
+    list {
+      ...ArticleFields
+    }
+  }
+}
