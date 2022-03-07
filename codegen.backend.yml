@@ -1,5 +1,8 @@
 schema: ./news-schema.graphql
 generates:
   ./apps/news-graphql/src/app/types.ts:
+    config:
+      namingConvention:
+        enumValues: keep
     plugins:
       - typescript-type-graphql

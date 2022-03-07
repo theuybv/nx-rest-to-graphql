@@ -4,6 +4,8 @@ generates:
   ./apps/graphql-news-app/src/app/types.ts:
     config:
       withHooks: true
+      namingConvention:
+        enumValues: keep
     plugins:
       - typescript
       - typescript-operations

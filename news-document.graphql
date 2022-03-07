@@ -51,3 +51,62 @@ query newsWithVideos($params: DataQueryParams) {
     }
   }
 }
+
+
+fragment NewsArticleListFragment on NewsArticleList {
+  list {
+    desktopImage {
+      url
+    }
+    datePublished
+    title
+    articleId
+    uid
+    shortDescription
+    content {
+      type
+      content {
+        sectionTitle
+        text
+        video
+        title
+        description
+      }
+    }
+  }
+}
+query frontPageArticles {
+  latestNews: news(params: { skip: 0, take: 15 }) {
+    ...NewsArticleListFragment
+  }
+
+  featuredNews: news(params: { skip: 0, take: 1 }) {
+    ...NewsArticleListFragment
+  }
+
+  restNews: news(params: { skip: 1, take: 10 }) {
+    ...NewsArticleListFragment
+  }
+
+  featuredEvents: event(params: { skip: 0, take: 1 }) {
+    list {
+      dateLocation
+      startDate
+      endDate
+      desktopImage {
+        url
+      }
+      content {
+        type
+        content {
+          sectionTitle
+          description
+        }
+      }
+    }
+  }
+
+  latestVideos: news(params: { filterContentTypeParams: { in: [videoBlock] }, take: 100, skip: 0 }) {
+    ...NewsArticleListFragment
+  }
+}

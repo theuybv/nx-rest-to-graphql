@@ -21,7 +21,7 @@ type ArticleResponse =
   DisruptionArticleList |
   MaintenanceArticleList
 
-const getDataFromApi= async (
+const getDataFromApi = async (
   articleType: ArticleType,
   params?: DataQueryParams
 ): Promise<ArticleResponse> => {
@@ -42,7 +42,7 @@ const getDataFromApi= async (
       ...overrideParams
     }
   });
-
+  
   const orderedList = orderBy(response.data.list,
     [orderField],
     [orderType.toLowerCase()]
@@ -53,9 +53,9 @@ const getDataFromApi= async (
       .toLowerCase()
       .indexOf(filterParams.match.toLowerCase()) > -1;
   }).filter(item => {
-    const types = item.content.map(contentType => contentType.type)
-    return intersection(filterContentTypeParams.in, types).length > 0
-  })
+    const types = item.content.map(contentType => contentType.type);
+    return intersection(filterContentTypeParams.in, types).length > 0;
+  });
 
   return {
     ...response.data,
@@ -85,7 +85,7 @@ export class QueryResolvers {
     @Arg('params', { nullable: true })
       params?: DataQueryParams
   ) {
-    return getDataFromApi(ArticleType.Event, params);
+    return getDataFromApi(ArticleType.event, params);
   }
 
   @Query(() => NewsArticleList)
@@ -93,7 +93,7 @@ export class QueryResolvers {
     @Arg('params', { nullable: true })
       params?: DataQueryParams
   ) {
-    return getDataFromApi(ArticleType.News, params);
+    return getDataFromApi(ArticleType.news, params);
   }
 
   @Query(() => MaintenanceArticleList)
@@ -101,7 +101,7 @@ export class QueryResolvers {
     @Arg('params', { nullable: true })
       params?: DataQueryParams
   ) {
-    return getDataFromApi(ArticleType.Maintenance, params);
+    return getDataFromApi(ArticleType.maintenance, params);
   }
 
   @Query(() => ArchiveArticleList)
@@ -109,7 +109,7 @@ export class QueryResolvers {
     @Arg('params', { nullable: true })
       params?: DataQueryParams
   ) {
-    return getDataFromApi(ArticleType.Archive, params);
+    return getDataFromApi(ArticleType.archive, params);
   }
 
   @Query(() => DisruptionArticleList)
@@ -117,6 +117,6 @@ export class QueryResolvers {
     @Arg('params', { nullable: true })
       params?: DataQueryParams
   ) {
-    return getDataFromApi(ArticleType.Disruption, params);
+    return getDataFromApi(ArticleType.disruption, params);
   }
 }

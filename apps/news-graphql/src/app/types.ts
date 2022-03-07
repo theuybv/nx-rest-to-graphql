@@ -201,12 +201,12 @@ export class ArchiveArticleList extends Iterator {
 };
 
 export enum ArticleType {
-  Archive = 'archive',
-  Disruption = 'disruption',
-  Event = 'event',
-  Maintenance = 'maintenance',
-  News = 'news',
-  Press = 'press'
+  archive = 'archive',
+  disruption = 'disruption',
+  event = 'event',
+  maintenance = 'maintenance',
+  news = 'news',
+  press = 'press'
 }
 TypeGraphQL.registerEnumType(ArticleType, { name: 'ArticleType' });
 
@@ -242,16 +242,16 @@ export class ContentContent {
 };
 
 export enum ContentType {
-  CheckmarkListBlock = 'checkmarkListBlock',
-  DoubleImageBlock = 'doubleImageBlock',
-  ImageBlock = 'imageBlock',
-  ImageGalleryBlock = 'imageGalleryBlock',
-  LinkListBlock = 'linkListBlock',
-  NewsletterSubscribeBlock = 'newsletterSubscribeBlock',
-  SectionTitleBlock = 'sectionTitleBlock',
-  TextBlock = 'textBlock',
-  TextImageBlock = 'textImageBlock',
-  VideoBlock = 'videoBlock'
+  checkmarkListBlock = 'checkmarkListBlock',
+  doubleImageBlock = 'doubleImageBlock',
+  imageBlock = 'imageBlock',
+  imageGalleryBlock = 'imageGalleryBlock',
+  linkListBlock = 'linkListBlock',
+  newsletterSubscribeBlock = 'newsletterSubscribeBlock',
+  sectionTitleBlock = 'sectionTitleBlock',
+  textBlock = 'textBlock',
+  textImageBlock = 'textImageBlock',
+  videoBlock = 'videoBlock'
 }
 TypeGraphQL.registerEnumType(ContentType, { name: 'ContentType' });
 
@@ -451,8 +451,8 @@ export class EventArticleList extends Iterator {
 };
 
 export enum FilterByField {
-  ShortDescription = 'shortDescription',
-  Title = 'title'
+  shortDescription = 'shortDescription',
+  title = 'title'
 }
 TypeGraphQL.registerEnumType(FilterByField, { name: 'FilterByField' });
 
@@ -474,9 +474,9 @@ export class FilterParams {
 };
 
 export enum Language {
-  De = 'de',
-  En = 'en',
-  Nl = 'nl'
+  de = 'de',
+  en = 'en',
+  nl = 'nl'
 }
 TypeGraphQL.registerEnumType(Language, { name: 'Language' });
 
@@ -607,16 +607,16 @@ export class NewsArticleList extends Iterator {
 };
 
 export enum OrderByField {
-  ArticleId = 'articleId',
-  DatePublished = 'datePublished',
-  DateUpdated = 'dateUpdated',
-  Uid = 'uid'
+  articleId = 'articleId',
+  datePublished = 'datePublished',
+  dateUpdated = 'dateUpdated',
+  uid = 'uid'
 }
 TypeGraphQL.registerEnumType(OrderByField, { name: 'OrderByField' });
 
 export enum OrderType {
-  Asc = 'ASC',
-  Desc = 'DESC'
+  ASC = 'ASC',
+  DESC = 'DESC'
 }
 TypeGraphQL.registerEnumType(OrderType, { name: 'OrderType' });
 
@@ -673,8 +673,8 @@ export class QueryNewsArgs {
 };
 
 export enum Status {
-  InProgress = 'inProgress',
-  Reported = 'reported',
-  Resolved = 'resolved'
+  inProgress = 'inProgress',
+  reported = 'reported',
+  resolved = 'resolved'
 }
 TypeGraphQL.registerEnumType(Status, { name: 'Status' });

@@ -60,12 +60,12 @@ export type Article = {
 };
 
 export enum ArticleType {
-  Archive = 'archive',
-  Disruption = 'disruption',
-  Event = 'event',
-  Maintenance = 'maintenance',
-  News = 'news',
-  Press = 'press'
+  archive = 'archive',
+  disruption = 'disruption',
+  event = 'event',
+  maintenance = 'maintenance',
+  news = 'news',
+  press = 'press'
 }
 
 export type Content = {
@@ -84,16 +84,16 @@ export type ContentContent = {
 };
 
 export enum ContentType {
-  CheckmarkListBlock = 'checkmarkListBlock',
-  DoubleImageBlock = 'doubleImageBlock',
-  ImageBlock = 'imageBlock',
-  ImageGalleryBlock = 'imageGalleryBlock',
-  LinkListBlock = 'linkListBlock',
-  NewsletterSubscribeBlock = 'newsletterSubscribeBlock',
-  SectionTitleBlock = 'sectionTitleBlock',
-  TextBlock = 'textBlock',
-  TextImageBlock = 'textImageBlock',
-  VideoBlock = 'videoBlock'
+  checkmarkListBlock = 'checkmarkListBlock',
+  doubleImageBlock = 'doubleImageBlock',
+  imageBlock = 'imageBlock',
+  imageGalleryBlock = 'imageGalleryBlock',
+  linkListBlock = 'linkListBlock',
+  newsletterSubscribeBlock = 'newsletterSubscribeBlock',
+  sectionTitleBlock = 'sectionTitleBlock',
+  textBlock = 'textBlock',
+  textImageBlock = 'textImageBlock',
+  videoBlock = 'videoBlock'
 }
 
 export type DataQueryParams = {
@@ -175,8 +175,8 @@ export type EventArticleList = Iterator & {
 };
 
 export enum FilterByField {
-  ShortDescription = 'shortDescription',
-  Title = 'title'
+  shortDescription = 'shortDescription',
+  title = 'title'
 }
 
 export type FilterContentTypeParams = {
@@ -199,9 +199,9 @@ export type Iterator = {
 };
 
 export enum Language {
-  De = 'de',
-  En = 'en',
-  Nl = 'nl'
+  de = 'de',
+  en = 'en',
+  nl = 'nl'
 }
 
 export enum LocationName {
@@ -278,15 +278,15 @@ export type NewsArticleList = Iterator & {
 };
 
 export enum OrderByField {
-  ArticleId = 'articleId',
-  DatePublished = 'datePublished',
-  DateUpdated = 'dateUpdated',
-  Uid = 'uid'
+  articleId = 'articleId',
+  datePublished = 'datePublished',
+  dateUpdated = 'dateUpdated',
+  uid = 'uid'
 }
 
 export enum OrderType {
-  Asc = 'ASC',
-  Desc = 'DESC'
+  ASC = 'ASC',
+  DESC = 'DESC'
 }
 
 export type Query = {
@@ -327,9 +327,9 @@ export type QueryNewsArgs = {
 };
 
 export enum Status {
-  InProgress = 'inProgress',
-  Reported = 'reported',
-  Resolved = 'resolved'
+  inProgress = 'inProgress',
+  reported = 'reported',
+  resolved = 'resolved'
 }
 
 type ArticleFragment_ArchiveArticle_Fragment = { __typename?: 'ArchiveArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
@@ -366,6 +366,13 @@ export type NewsWithVideosQueryVariables = Exact<{
 
 export type NewsWithVideosQuery = { __typename?: 'Query', news?: { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', title?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', video?: string | null } | null } | null> | null } | null> | null } | null };
 
+export type NewsArticleListFragmentFragment = { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', datePublished?: string | null, title?: string | null, articleId?: number | null, uid?: number | null, shortDescription?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', sectionTitle?: string | null, text?: string | null, video?: string | null, title?: string | null, description?: string | null } | null } | null> | null } | null> | null };
+
+export type FrontPageArticlesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FrontPageArticlesQuery = { __typename?: 'Query', latestNews?: { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', datePublished?: string | null, title?: string | null, articleId?: number | null, uid?: number | null, shortDescription?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', sectionTitle?: string | null, text?: string | null, video?: string | null, title?: string | null, description?: string | null } | null } | null> | null } | null> | null } | null, featuredNews?: { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', datePublished?: string | null, title?: string | null, articleId?: number | null, uid?: number | null, shortDescription?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', sectionTitle?: string | null, text?: string | null, video?: string | null, title?: string | null, description?: string | null } | null } | null> | null } | null> | null } | null, restNews?: { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', datePublished?: string | null, title?: string | null, articleId?: number | null, uid?: number | null, shortDescription?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', sectionTitle?: string | null, text?: string | null, video?: string | null, title?: string | null, description?: string | null } | null } | null> | null } | null> | null } | null, featuredEvents?: { __typename?: 'EventArticleList', list?: Array<{ __typename?: 'EventArticle', dateLocation?: string | null, startDate?: string | null, endDate?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', sectionTitle?: string | null, description?: string | null } | null } | null> | null } | null> | null } | null, latestVideos?: { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', datePublished?: string | null, title?: string | null, articleId?: number | null, uid?: number | null, shortDescription?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', sectionTitle?: string | null, text?: string | null, video?: string | null, title?: string | null, description?: string | null } | null } | null> | null } | null> | null } | null };
+
 export const ArticleFragmentFragmentDoc = gql`
     fragment ArticleFragment on Article {
   uid
@@ -388,6 +395,30 @@ export const IteratorFragmentFragmentDoc = gql`
   skip
   take
   total
+}
+    `;
+export const NewsArticleListFragmentFragmentDoc = gql`
+    fragment NewsArticleListFragment on NewsArticleList {
+  list {
+    desktopImage {
+      url
+    }
+    datePublished
+    title
+    articleId
+    uid
+    shortDescription
+    content {
+      type
+      content {
+        sectionTitle
+        text
+        video
+        title
+        description
+      }
+    }
+  }
 }
     `;
 export const NewsAndEventDocument = gql`
@@ -432,4 +463,43 @@ export const NewsWithVideosDocument = gql`
 
 export function useNewsWithVideosQuery(options?: Omit<Urql.UseQueryArgs<NewsWithVideosQueryVariables>, 'query'>) {
   return Urql.useQuery<NewsWithVideosQuery>({ query: NewsWithVideosDocument, ...options });
+};
+export const FrontPageArticlesDocument = gql`
+    query frontPageArticles {
+  latestNews: news(params: {skip: 0, take: 15}) {
+    ...NewsArticleListFragment
+  }
+  featuredNews: news(params: {skip: 0, take: 1}) {
+    ...NewsArticleListFragment
+  }
+  restNews: news(params: {skip: 1, take: 10}) {
+    ...NewsArticleListFragment
+  }
+  featuredEvents: event(params: {skip: 0, take: 1}) {
+    list {
+      dateLocation
+      startDate
+      endDate
+      desktopImage {
+        url
+      }
+      content {
+        type
+        content {
+          sectionTitle
+          description
+        }
+      }
+    }
+  }
+  latestVideos: news(
+    params: {filterContentTypeParams: {in: [videoBlock]}, take: 100, skip: 0}
+  ) {
+    ...NewsArticleListFragment
+  }
+}
+    ${NewsArticleListFragmentFragmentDoc}`;
+
+export function useFrontPageArticlesQuery(options?: Omit<Urql.UseQueryArgs<FrontPageArticlesQueryVariables>, 'query'>) {
+  return Urql.useQuery<FrontPageArticlesQuery>({ query: FrontPageArticlesDocument, ...options });
 };

@@ -1,17 +1,20 @@
-import styled from '@emotion/styled';
+import Carousel from '../carousel/carousel';
+import { useFrontPageArticlesQuery } from '../types';
+import { FC } from 'react';
 
-/* eslint-disable-next-line */
-export interface DashboardProps {}
 
-const StyledDashboard = styled.div`
-  color: pink;
-`;
+const Dashboard: FC = () => {
+  const [{fetching, data}] = useFrontPageArticlesQuery();
 
-export function Dashboard(props: DashboardProps) {
+
+  if (fetching) {
+    return <p>loading...</p>;
+  }
+  console.log(data?.latestVideos);
   return (
-    <StyledDashboard>
-      <h1>Welcome to Dashboard!</h1>
-    </StyledDashboard>
+    <>
+      <Carousel />
+    </>
   );
 }
 
