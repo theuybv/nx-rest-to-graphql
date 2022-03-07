@@ -12,7 +12,7 @@ import {
   MaintenanceArticleList,
   NewsArticleList
 } from './types';
-import { orderBy } from 'lodash';
+import { orderBy, intersection } from 'lodash';
 
 type ArticleResponse =
   NewsArticleList |
@@ -21,10 +21,10 @@ type ArticleResponse =
   DisruptionArticleList |
   MaintenanceArticleList
 
-const getDataFromApi = async (
+const getDataFromApi= async (
   articleType: ArticleType,
   params?: DataQueryParams
-) => {
+): Promise<ArticleResponse> => {
   const overrideParams: DataQueryParams = {
     ...DEFAULT_QUERY_PARAMS,
     ...params
@@ -33,7 +33,8 @@ const getDataFromApi = async (
   const {
     filterParams,
     orderType,
-    orderField
+    orderField,
+    filterContentTypeParams
   } = overrideParams;
 
   const response = await axios.get<ArticleResponse>(`${BASE_API_URL}/${articleType}`, {
@@ -51,7 +52,10 @@ const getDataFromApi = async (
     return item[filterParams.field]
       .toLowerCase()
       .indexOf(filterParams.match.toLowerCase()) > -1;
-  });
+  }).filter(item => {
+    const types = item.content.map(contentType => contentType.type)
+    return intersection(filterContentTypeParams.in, types).length > 0
+  })
 
   return {
     ...response.data,

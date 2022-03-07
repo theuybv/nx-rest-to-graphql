@@ -76,8 +76,11 @@ export type Content = {
 
 export type ContentContent = {
   __typename?: 'ContentContent';
+  description?: Maybe<Scalars['String']>;
   sectionTitle?: Maybe<Scalars['String']>;
   text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  video?: Maybe<Scalars['String']>;
 };
 
 export enum ContentType {
@@ -94,6 +97,7 @@ export enum ContentType {
 }
 
 export type DataQueryParams = {
+  filterContentTypeParams?: InputMaybe<FilterContentTypeParams>;
   filterParams?: InputMaybe<FilterParams>;
   language?: InputMaybe<Language>;
   orderField?: InputMaybe<OrderByField>;
@@ -174,6 +178,10 @@ export enum FilterByField {
   ShortDescription = 'shortDescription',
   Title = 'title'
 }
+
+export type FilterContentTypeParams = {
+  in?: InputMaybe<Array<InputMaybe<ContentType>>>;
+};
 
 export type FilterParams = {
   field?: InputMaybe<FilterByField>;
@@ -351,6 +359,13 @@ export type NewsAndEventQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type NewsAndEventQuery = { __typename?: 'Query', news?: { __typename?: 'NewsArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null, list?: Array<{ __typename?: 'NewsArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null } | null> | null } | null, event?: { __typename?: 'EventArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null, list?: Array<{ __typename?: 'EventArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null } | null> | null } | null };
 
+export type NewsWithVideosQueryVariables = Exact<{
+  params?: InputMaybe<DataQueryParams>;
+}>;
+
+
+export type NewsWithVideosQuery = { __typename?: 'Query', news?: { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', title?: string | null, desktopImage?: { __typename?: 'DesktopImage', url?: string | null } | null, content?: Array<{ __typename?: 'Content', type?: ContentType | null, content?: { __typename?: 'ContentContent', video?: string | null } | null } | null> | null } | null> | null } | null };
+
 export const ArticleFragmentFragmentDoc = gql`
     fragment ArticleFragment on Article {
   uid
@@ -395,4 +410,26 @@ ${ArticleFragmentFragmentDoc}`;
 
 export function useNewsAndEventQuery(options?: Omit<Urql.UseQueryArgs<NewsAndEventQueryVariables>, 'query'>) {
   return Urql.useQuery<NewsAndEventQuery>({ query: NewsAndEventDocument, ...options });
+};
+export const NewsWithVideosDocument = gql`
+    query newsWithVideos($params: DataQueryParams) {
+  news(params: $params) {
+    list {
+      title
+      desktopImage {
+        url
+      }
+      content {
+        type
+        content {
+          video
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useNewsWithVideosQuery(options?: Omit<Urql.UseQueryArgs<NewsWithVideosQueryVariables>, 'query'>) {
+  return Urql.useQuery<NewsWithVideosQuery>({ query: NewsWithVideosDocument, ...options });
 };

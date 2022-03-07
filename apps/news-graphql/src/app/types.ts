@@ -226,10 +226,19 @@ export class ContentContent {
   __typename?: 'ContentContent';
 
   @TypeGraphQL.Field(type => String, { nullable: true })
+  description!: Maybe<Scalars['String']>;
+
+  @TypeGraphQL.Field(type => String, { nullable: true })
   sectionTitle!: Maybe<Scalars['String']>;
 
   @TypeGraphQL.Field(type => String, { nullable: true })
   text!: Maybe<Scalars['String']>;
+
+  @TypeGraphQL.Field(type => String, { nullable: true })
+  title!: Maybe<Scalars['String']>;
+
+  @TypeGraphQL.Field(type => String, { nullable: true })
+  video!: Maybe<Scalars['String']>;
 };
 
 export enum ContentType {
@@ -248,6 +257,9 @@ TypeGraphQL.registerEnumType(ContentType, { name: 'ContentType' });
 
 @TypeGraphQL.InputType()
 export class DataQueryParams {
+
+  @TypeGraphQL.Field(type => FilterContentTypeParams, { nullable: true })
+  filterContentTypeParams!: Maybe<FilterContentTypeParams>;
 
   @TypeGraphQL.Field(type => FilterParams, { nullable: true })
   filterParams!: Maybe<FilterParams>;
@@ -443,6 +455,13 @@ export enum FilterByField {
   Title = 'title'
 }
 TypeGraphQL.registerEnumType(FilterByField, { name: 'FilterByField' });
+
+@TypeGraphQL.InputType()
+export class FilterContentTypeParams {
+
+  @TypeGraphQL.Field(type => [ContentType], { nullable: 'itemsAndList' })
+  in!: Maybe<Array<Maybe<ContentType>>>;
+};
 
 @TypeGraphQL.InputType()
 export class FilterParams {

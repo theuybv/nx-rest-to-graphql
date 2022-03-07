@@ -3,6 +3,9 @@ scalar Date
 type ContentContent {
   text: String
   sectionTitle: String
+  video: String
+  title: String
+  description: String
 }
 
 type Content {
@@ -259,6 +262,10 @@ input FilterParams {
   field: FilterByField
 }
 
+input FilterContentTypeParams {
+  in: [ContentType]
+}
+
 input DataQueryParams {
   language: Language
   skip: Int
@@ -266,6 +273,7 @@ input DataQueryParams {
   orderField: OrderByField
   orderType: OrderType
   filterParams: FilterParams
+  filterContentTypeParams: FilterContentTypeParams
 }
 
 type Query {

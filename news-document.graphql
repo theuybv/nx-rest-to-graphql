@@ -34,3 +34,20 @@ query NewsAndEvent {
     }
   }
 }
+
+query newsWithVideos($params: DataQueryParams) {
+  news(params: $params) {
+    list {
+      title
+      desktopImage {
+        url
+      }
+      content {
+        type
+        content {
+          video
+        }
+      }
+    }
+  }
+}
