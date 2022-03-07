@@ -1,4 +1,4 @@
-fragment ArticleFields on Article {
+fragment ArticleFragment on Article {
   uid
   articleId
   title
@@ -10,15 +10,27 @@ fragment ArticleFields on Article {
   shortDescription
 }
 
+fragment IteratorFragment on Iterator {
+  currentPage
+  hasNextPage
+  hasPreviousPage
+  pageCount
+  skip
+  take
+  total
+}
+
 query NewsAndEvent {
   news {
+    ...IteratorFragment
     list {
-      ...ArticleFields
+      ...ArticleFragment
     }
   }
   event {
+    ...IteratorFragment
     list {
-      ...ArticleFields
+      ...ArticleFragment
     }
   }
 }

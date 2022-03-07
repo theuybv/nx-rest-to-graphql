@@ -2,7 +2,8 @@ import { FC, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { Provider } from 'urql';
 import { graphqlClient } from './graphqlClient';
-import { NewsArticle, useNewsAndEventQuery } from './types';
+import { useNewsAndEventQuery } from './types';
+import Dashboard from './dashboard/dashboard';
 
 const Index: FC = () => {
   const [result, reexecuteQuery] = useNewsAndEventQuery({ pause: true });
@@ -38,6 +39,7 @@ export function App() {
   return (
     <Provider value={graphqlClient}>
       <Route path='/' exact component={Index} />
+      <Route path='/dashboard' exact component={Dashboard} />
     </Provider>
   );
 }

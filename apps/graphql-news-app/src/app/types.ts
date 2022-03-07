@@ -324,23 +324,35 @@ export enum Status {
   Resolved = 'resolved'
 }
 
-type ArticleFields_ArchiveArticle_Fragment = { __typename?: 'ArchiveArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
+type ArticleFragment_ArchiveArticle_Fragment = { __typename?: 'ArchiveArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
 
-type ArticleFields_DisruptionArticle_Fragment = { __typename?: 'DisruptionArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
+type ArticleFragment_DisruptionArticle_Fragment = { __typename?: 'DisruptionArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
 
-type ArticleFields_EventArticle_Fragment = { __typename?: 'EventArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
+type ArticleFragment_EventArticle_Fragment = { __typename?: 'EventArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
 
-type ArticleFields_NewsArticle_Fragment = { __typename?: 'NewsArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
+type ArticleFragment_NewsArticle_Fragment = { __typename?: 'NewsArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null };
 
-export type ArticleFieldsFragment = ArticleFields_ArchiveArticle_Fragment | ArticleFields_DisruptionArticle_Fragment | ArticleFields_EventArticle_Fragment | ArticleFields_NewsArticle_Fragment;
+export type ArticleFragmentFragment = ArticleFragment_ArchiveArticle_Fragment | ArticleFragment_DisruptionArticle_Fragment | ArticleFragment_EventArticle_Fragment | ArticleFragment_NewsArticle_Fragment;
+
+type IteratorFragment_ArchiveArticleList_Fragment = { __typename?: 'ArchiveArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null };
+
+type IteratorFragment_DisruptionArticleList_Fragment = { __typename?: 'DisruptionArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null };
+
+type IteratorFragment_EventArticleList_Fragment = { __typename?: 'EventArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null };
+
+type IteratorFragment_MaintenanceArticleList_Fragment = { __typename?: 'MaintenanceArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null };
+
+type IteratorFragment_NewsArticleList_Fragment = { __typename?: 'NewsArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null };
+
+export type IteratorFragmentFragment = IteratorFragment_ArchiveArticleList_Fragment | IteratorFragment_DisruptionArticleList_Fragment | IteratorFragment_EventArticleList_Fragment | IteratorFragment_MaintenanceArticleList_Fragment | IteratorFragment_NewsArticleList_Fragment;
 
 export type NewsAndEventQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NewsAndEventQuery = { __typename?: 'Query', news?: { __typename?: 'NewsArticleList', list?: Array<{ __typename?: 'NewsArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null } | null> | null } | null, event?: { __typename?: 'EventArticleList', list?: Array<{ __typename?: 'EventArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null } | null> | null } | null };
+export type NewsAndEventQuery = { __typename?: 'Query', news?: { __typename?: 'NewsArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null, list?: Array<{ __typename?: 'NewsArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null } | null> | null } | null, event?: { __typename?: 'EventArticleList', currentPage?: number | null, hasNextPage?: boolean | null, hasPreviousPage?: boolean | null, pageCount?: number | null, skip?: number | null, take?: number | null, total?: number | null, list?: Array<{ __typename?: 'EventArticle', uid?: number | null, articleId?: number | null, title?: string | null, type?: ArticleType | null, language?: Language | null, datePublished?: string | null, dateUpdated?: string | null, url?: string | null, shortDescription?: string | null } | null> | null } | null };
 
-export const ArticleFieldsFragmentDoc = gql`
-    fragment ArticleFields on Article {
+export const ArticleFragmentFragmentDoc = gql`
+    fragment ArticleFragment on Article {
   uid
   articleId
   title
@@ -352,20 +364,34 @@ export const ArticleFieldsFragmentDoc = gql`
   shortDescription
 }
     `;
+export const IteratorFragmentFragmentDoc = gql`
+    fragment IteratorFragment on Iterator {
+  currentPage
+  hasNextPage
+  hasPreviousPage
+  pageCount
+  skip
+  take
+  total
+}
+    `;
 export const NewsAndEventDocument = gql`
     query NewsAndEvent {
   news {
+    ...IteratorFragment
     list {
-      ...ArticleFields
+      ...ArticleFragment
     }
   }
   event {
+    ...IteratorFragment
     list {
-      ...ArticleFields
+      ...ArticleFragment
     }
   }
 }
-    ${ArticleFieldsFragmentDoc}`;
+    ${IteratorFragmentFragmentDoc}
+${ArticleFragmentFragmentDoc}`;
 
 export function useNewsAndEventQuery(options?: Omit<Urql.UseQueryArgs<NewsAndEventQueryVariables>, 'query'>) {
   return Urql.useQuery<NewsAndEventQuery>({ query: NewsAndEventDocument, ...options });

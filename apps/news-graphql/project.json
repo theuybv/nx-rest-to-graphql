@@ -8,9 +8,17 @@
       "options": {
         "commands": [
           {
-            "command": "npm run codegen"
+            "command": "graphql-codegen --config codegen.backend.yml -w"
+          },
+          {
+            "command": "graphql-codegen --config codegen.frontend.yml -w"
+          },
+          {
+            "command": "echo 'READY'"
           }
-        ]
+        ],
+        "readyWhen": "READY",
+        "parallel": true
       }
     },
     "build": {
@@ -43,7 +51,10 @@
     "serve": {
       "executor": "@nrwl/node:node",
       "options": {
-        "buildTarget": "news-graphql:build"
+        "buildTarget": "news-graphql:build",
+        "waitUntilTargets": [
+          "news-graphql:codegen"
+        ]
       }
     },
     "lint": {

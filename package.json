@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npm run codegen && nx run-many --target=serve --projects=news-graphql,graphql-news-app",
+    "start": "nx run-many --target=serve --projects=news-graphql,graphql-news-app",
     "build": "nx build",
-    "test": "nx test",
-    "codegen": "graphql-codegen --config ./codegen.backend.yml -w && graphql-codegen --config ./codegen.frontend.yml -w"
+    "test": "nx test"
   },
   "private": true,
   "dependencies": {
