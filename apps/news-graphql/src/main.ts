@@ -28,7 +28,7 @@ const port = process.env.PORT || 3333;
   const server = new ApolloServer({
     schema,
     introspection: true,
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
+    // plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
   });
 
   await server.start();
