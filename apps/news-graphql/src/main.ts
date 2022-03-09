@@ -26,7 +26,7 @@ const CLIENT_BUILD_PATH = join(__dirname, '../graphql-news-app');
     // add this
   });
 
-  const port = process.env.port || 3333;
+  const port = process.env.PORT || 3333;
 
   const server = new ApolloServer({
     schema
