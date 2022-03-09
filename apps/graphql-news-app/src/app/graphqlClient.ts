@@ -7,6 +7,6 @@ import {
 } from 'urql';
 
 export const graphqlClient = createClient({
-  url: 'http://localhost:3333/graphql',
+  url: 'graphql',
   exchanges: [dedupExchange, refocusExchange(), cacheExchange, fetchExchange],
 });

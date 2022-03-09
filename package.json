@@ -1,10 +1,10 @@
 {
-  "name": "@theuybv",
+  "name": "theuybv",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "serve": "npx nx run-many --target=serve --projects=news-graphql,graphql-news-app",
-    "build": "npx nx run-many --target=build --projects=news-graphql,graphql-news-app",
+    "serve": "npx nx run-many --target=serve --projects=news-graphql,graphql-news-app --parallel=true",
+    "build": "npx nx run-many --target=build --projects=news-graphql,graphql-news-app --parallel=true",
     "start": "node ./dist/apps/news-graphql/main.js",
     "test": "nx test"
   },
@@ -23,6 +23,7 @@
     "axios": "^0.26.0",
     "class-validator": "^0.13.2",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
     "daisyui": "^2.6.2",
     "express": "4.17.2",
     "graphql": "^15.8.0",

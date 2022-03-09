@@ -3,8 +3,8 @@ import * as express from 'express';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { QueryResolvers } from './app/resolvers';
-
 import { join } from 'path';
+import * as cors from 'cors';
 
 const CLIENT_BUILD_PATH = join(__dirname, '../graphql-news-app');
 const port = process.env.PORT || 3333;
@@ -14,6 +14,8 @@ const port = process.env.PORT || 3333;
 
   const app = express();
   app.use(express.static(CLIENT_BUILD_PATH));
+  app.use(cors());
+
 
   app.get('/api', (req, res) => {
     res.send({ message: 'Welcome to news-graphql!' });
