@@ -4,15 +4,24 @@ import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { QueryResolvers } from './app/resolvers';
 
+import { join } from 'path';
+
+const CLIENT_BUILD_PATH = join(__dirname, '../graphql-news-app');
+
 (async () => {
   const app = express();
+  app.use(express.static(CLIENT_BUILD_PATH));
 
   app.get('/api', (req, res) => {
     res.send({ message: 'Welcome to news-graphql!' });
   });
 
+  app.get('*', (request, response) => {
+    response.sendFile(join(CLIENT_BUILD_PATH, 'index.html'));
+  });
+
   const schema = await buildSchema({
-    resolvers: [QueryResolvers],
+    resolvers: [QueryResolvers]
     // dateScalarMode: 'isoDate', // "timestamp" or "isoDate"
     // add this
   });
@@ -20,7 +29,7 @@ import { QueryResolvers } from './app/resolvers';
   const port = process.env.port || 3333;
 
   const server = new ApolloServer({
-    schema,
+    schema
   });
 
   await server.start();
