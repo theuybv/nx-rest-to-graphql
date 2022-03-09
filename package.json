@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run-many --target=serve --projects=news-graphql,graphql-news-app",
-    "build": "nx build",
+    "serve": "npx nx run-many --target=serve --projects=news-graphql,graphql-news-app",
+    "build": "npx nx run-many --target=build --projects=nx-fullstack,api --parallel=true",
+    "start": "node ./dist/news-graphql/main.js",
     "test": "nx test"
   },
   "private": true,
