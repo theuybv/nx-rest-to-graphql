@@ -8,10 +8,10 @@
       "options": {
         "commands": [
           {
-            "command": "graphql-codegen --config codegen.backend.yml -w"
+            "command": "graphql-codegen --config ./graphql/codegen.backend.yml -w"
           },
           {
-            "command": "graphql-codegen --config codegen.frontend.yml -w"
+            "command": "graphql-codegen --config ./graphql/codegen.frontend.yml -w"
           },
           {
             "command": "echo 'READY'"
