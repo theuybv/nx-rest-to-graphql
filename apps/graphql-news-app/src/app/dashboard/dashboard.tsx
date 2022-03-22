@@ -34,11 +34,12 @@ const Dashboard: FC = () => {
         const videContent = item?.content?.find(content => content?.type === ContentType.videoBlock);
         return <div key={index}>
           <input type='checkbox' id={item?.uid?.toString()} className='modal-toggle'/>
-          <div className='modal justify-start items-start w-full'>
-            <div className='modal-box w-[100vw]'>
+          <div className='modal items-center'>
+            <div className='modal-box'>
               <h3 className='font-bold text-lg'>{item?.title}</h3>
               <p className={'mt-4'}>
                 <iframe
+                  className={'w-full max-h-[400px] aspect-video'}
                   src={'https://' + videContent?.content?.video?.replace('//', '').replace('/watch?v=', '/embed/')}/>
               </p>
               <div className='modal-action'>
