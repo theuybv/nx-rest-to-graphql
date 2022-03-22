@@ -11,7 +11,7 @@ const Navbar: FC = ({ children }) => {
           {/*<a className='btn btn-ghost normal-case text-xl'>GraphQL News App</a>*/}
             <RfhLogo />
         </div>
-        <div className='flex-none ml-4'>
+        <div className='flex-none ml-4 hidden sm:block'>
           <ul className='menu menu-horizontal p-0'>
             <li><a>Evenementen</a></li>
             <li tabIndex={0}>

@@ -39,7 +39,8 @@
     "tailwindcss": "^3.0.23",
     "tslib": "^2.0.0",
     "type-graphql": "^1.1.1",
-    "urql": "^2.2.0"
+    "urql": "^2.2.0",
+    "use-breakpoint": "^3.0.1"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "11.3.0",

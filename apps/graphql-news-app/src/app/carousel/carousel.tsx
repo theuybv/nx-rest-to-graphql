@@ -1,24 +1,27 @@
-import { FC, FunctionComponent } from 'react';
+import {FC, FunctionComponent} from 'react';
+import {useGetBreakpoint} from "../hooks/tailwind";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
-import { Navigation } from 'swiper';
+import {Navigation} from 'swiper';
 
 import './carousel.css';
 
-const Carousel: FC<{ slides: { Component: FunctionComponent }[] }> = ({ slides }) => {
+const Carousel: FC<{ slides: { Component: FunctionComponent }[] }> = ({slides}) => {
+  const {breakpoint} = useGetBreakpoint();
   return (
     <Swiper
+      autoHeight
       className={'w-full'}
       navigation={true}
-      slidesPerView={3}
+      slidesPerView={breakpoint === 'xs' ? 2 : 3}
       spaceBetween={20}
       modules={[Navigation]}
     >
-      {slides.map(item => <SwiperSlide>{item.Component}</SwiperSlide>)}
+      {slides.map((item, index) => <SwiperSlide key={index}>{item.Component}</SwiperSlide>)}
     </Swiper>
   );
 };

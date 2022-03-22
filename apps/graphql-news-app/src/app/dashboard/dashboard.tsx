@@ -1,5 +1,5 @@
-import { ContentType, useFrontPageArticlesQuery } from '../types';
-import { FC, FunctionComponent } from 'react';
+import {ContentType, useFrontPageArticlesQuery} from '../types';
+import {FC, FunctionComponent} from 'react';
 import Navbar from '../navbar/Navbar';
 import FeaturedCard from '../featured-card/FeaturedCard';
 import MediaCard from '../media-card/MediaCard';
@@ -10,18 +10,18 @@ import RfhLogo from '../RfhLogo';
 
 
 const Dashboard: FC = () => {
-  const [{ fetching, data }] = useFrontPageArticlesQuery();
+  const [{fetching, data}] = useFrontPageArticlesQuery();
 
-  const videoSlides: { Component: FunctionComponent }[] = data?.latestVideos?.list?.map(item => {
+  const videoSlides: { Component: FunctionComponent }[] = data?.latestVideos?.list?.map((item, index) => {
     return {
-      Component: () => <CarouselItem {...item} />
+      Component: () => <CarouselItem key={index} {...item} />
     };
   }) || [];
 
   if (fetching) {
-    return <div className={'w-full flex justify-center items-center'} style={{ height: '100vh' }}>
+    return <div className={'w-full flex justify-center items-center'} style={{height: '100vh'}}>
       <div className={'flex flex-col items-center gap-2'}>
-        <RfhLogo />
+        <RfhLogo/>
         <div className={'ml-4 text-xs block'}>'s wachten waard</div>
       </div>
     </div>;
@@ -29,47 +29,47 @@ const Dashboard: FC = () => {
 
 
   return (
-    <div className={'animate-fade'}>
-      {data?.latestVideos?.list?.map((item) => {
+    <div className={'animate-fade pb-8'}>
+      {data?.latestVideos?.list?.map((item, index) => {
         const videContent = item?.content?.find(content => content?.type === ContentType.videoBlock);
-        return <>
-          <input type='checkbox' id={item?.uid?.toString()} className='modal-toggle' />
-          <div className='modal'>
-            <div className='modal-box'>
+        return <div key={index}>
+          <input type='checkbox' id={item?.uid?.toString()} className='modal-toggle'/>
+          <div className='modal justify-start items-start w-full'>
+            <div className='modal-box w-[100vw]'>
               <h3 className='font-bold text-lg'>{item?.title}</h3>
               <p className={'mt-4'}>
-                <iframe className={'w-full'} height={400}
-                        src={'https://' + videContent?.content?.video?.replace('//', '').replace('/watch?v=', '/embed/')} />
+                <iframe
+                  src={'https://' + videContent?.content?.video?.replace('//', '').replace('/watch?v=', '/embed/')}/>
               </p>
               <div className='modal-action'>
                 <label htmlFor={item?.uid?.toString()} className='btn w-full btn-primary'>Sluiten</label>
               </div>
             </div>
           </div>
-        </>;
+        </div>;
       })}
 
-      <Navbar />
+      <Navbar/>
       <div className='container mx-auto max-w-5xl my-6 flex gap-6 flex-col px-4'>
-        <section className='grid grid-cols-2 gap-4'>
-          {data?.featuredNews?.list?.map(item => <FeaturedCard {...item} />)}
-          {data?.featuredEvents?.list?.map(item => <FeaturedCard {...item} />)}
+        <section className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+          {data?.featuredNews?.list?.map((item, index) => <FeaturedCard key={index} {...item} />)}
+          {data?.featuredEvents?.list?.map((item, index) => <FeaturedCard key={index} {...item} />)}
         </section>
-        <div className='flex flex-row gap-4'>
-          <div className='w-3/4 h-fit'>
-            <div className='grid grid-cols-3 gap-4 '>
-              {data?.restNews?.list?.map(item => <MediaCard {...item} />)}
+        <div className='flex flex-col sm:flex-row gap-4'>
+          <div className='w-full sm:w-3/4 h-fit'>
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 '>
+              {data?.restNews?.list?.map((item, index) => <MediaCard key={index} {...item} />)}
             </div>
             <div className='grid grid-cols-1 mt-8 flex gap-4'>
               <h2 className='text-3xl text-primary'>Kijken</h2>
-              <Carousel slides={videoSlides} />
+              <Carousel slides={videoSlides}/>
             </div>
           </div>
-          <div className='w-1/4'>
+          <div className='w-full sm:w-1/4'>
             <div className='shadow-md px-4 py-6'>
               <h3 className='text-2xl text-primary'>Laatste nieuws</h3>
               <div className='divide-y divide-solid flex gap-4 flex-col'>
-                {data?.latestNews?.list?.map(item => <ArticleListItem {...item} />)}
+                {data?.latestNews?.list?.map((item, index) => <ArticleListItem key={index} {...item} />)}
               </div>
             </div>
           </div>
