@@ -68,6 +68,12 @@ export enum ArticleType {
   press = 'press'
 }
 
+export type AudienceOrInterest = {
+  __typename?: 'AudienceOrInterest';
+  id?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+};
+
 export type Content = {
   __typename?: 'Content';
   content?: Maybe<ContentContent>;
@@ -249,12 +255,12 @@ export type MobileImage = {
 export type NewsArticle = Article & {
   __typename?: 'NewsArticle';
   articleId?: Maybe<Scalars['Int']>;
-  audiences?: Maybe<Array<Maybe<Scalars['String']>>>;
+  audiences?: Maybe<Array<Maybe<AudienceOrInterest>>>;
   content?: Maybe<Array<Maybe<Content>>>;
   datePublished?: Maybe<Scalars['String']>;
   dateUpdated?: Maybe<Scalars['String']>;
   desktopImage?: Maybe<DesktopImage>;
-  interests?: Maybe<Array<Maybe<Scalars['String']>>>;
+  interests?: Maybe<Array<Maybe<AudienceOrInterest>>>;
   language?: Maybe<Language>;
   mobileImage?: Maybe<MobileImage>;
   newsletterSubscription?: Maybe<Scalars['String']>;

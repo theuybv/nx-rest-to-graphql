@@ -1,5 +1,10 @@
 scalar Date
 
+type AudienceOrInterest  {
+  title: String
+  id: String
+}
+
 type ContentContent {
   text: String
   sectionTitle: String
@@ -48,8 +53,8 @@ type NewsArticle implements Article {
 
   newsletterSubscription: String
   content: [Content]
-  interests: [String]
-  audiences: [String]
+  interests: [AudienceOrInterest]
+  audiences: [AudienceOrInterest]
   mobileImage: MobileImage
   desktopImage: DesktopImage
 }

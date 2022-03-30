@@ -1,6 +1,6 @@
-schema: ./news-schema.graphql
+schema: graphql/news-schema.graphql
 generates:
-  ./apps/news-graphql/src/app/types.ts:
+  apps/news-graphql/src/app/types.ts:
     config:
       namingConvention:
         enumValues: keep

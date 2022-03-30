@@ -1,7 +1,7 @@
-schema: ./news-schema.graphql
-documents: ./news-document.graphql
+schema: graphql/news-schema.graphql
+documents: graphql/news-document.graphql
 generates:
-  ./apps/graphql-news-app/src/app/types.ts:
+  apps/graphql-news-app/src/app/types.ts:
     config:
       withHooks: true
       namingConvention:

@@ -211,6 +211,17 @@ export enum ArticleType {
 TypeGraphQL.registerEnumType(ArticleType, { name: 'ArticleType' });
 
 @TypeGraphQL.ObjectType()
+export class AudienceOrInterest {
+  __typename?: 'AudienceOrInterest';
+
+  @TypeGraphQL.Field(type => String, { nullable: true })
+  id!: Maybe<Scalars['String']>;
+
+  @TypeGraphQL.Field(type => String, { nullable: true })
+  title!: Maybe<Scalars['String']>;
+};
+
+@TypeGraphQL.ObjectType()
 export class Content {
   __typename?: 'Content';
 
@@ -534,8 +545,8 @@ export class NewsArticle extends Article {
   @TypeGraphQL.Field(type => TypeGraphQL.Int, { nullable: true })
   articleId!: Maybe<Scalars['Int']>;
 
-  @TypeGraphQL.Field(type => [String], { nullable: 'itemsAndList' })
-  audiences!: Maybe<Array<Maybe<Scalars['String']>>>;
+  @TypeGraphQL.Field(type => [AudienceOrInterest], { nullable: 'itemsAndList' })
+  audiences!: Maybe<Array<Maybe<AudienceOrInterest>>>;
 
   @TypeGraphQL.Field(type => [Content], { nullable: 'itemsAndList' })
   content!: Maybe<Array<Maybe<Content>>>;
@@ -549,8 +560,8 @@ export class NewsArticle extends Article {
   @TypeGraphQL.Field(type => DesktopImage, { nullable: true })
   desktopImage!: Maybe<DesktopImage>;
 
-  @TypeGraphQL.Field(type => [String], { nullable: 'itemsAndList' })
-  interests!: Maybe<Array<Maybe<Scalars['String']>>>;
+  @TypeGraphQL.Field(type => [AudienceOrInterest], { nullable: 'itemsAndList' })
+  interests!: Maybe<Array<Maybe<AudienceOrInterest>>>;
 
   @TypeGraphQL.Field(type => Language, { nullable: true })
   language!: Maybe<Language>;
